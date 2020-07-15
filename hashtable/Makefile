@@ -1,10 +1,9 @@
 CC := gcc
-LIBS := -lm
 TARGET := bin
-OBJS := main.o hashtable.o list.o
+OBJS := main.o hashtable.o
 
 $(TARGET): $(OBJS)
-	$(CC) $(LIBS) -o $@ $(OBJS)
+	$(CC) -o $@ $(OBJS)
 
 clean:
 	$(RM) $(TARGET) $(OBJS)

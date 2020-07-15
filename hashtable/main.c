@@ -1,39 +1,34 @@
 #include "hashtable.h"
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
 static char *chomp(char *buf)
 {
     size_t length = strlen(buf);
-
     if (buf[length - 1] == '\n') {
         buf[length - 1] = '\0';
     }
-
     return buf;
 }
 
-int main(int argc, char **argv)
-{
-    FILE *fp = fopen("words_ja", "r");
-    if (fp == NULL) {
-        printf("file not found.\n");
-        return 1;
+int main() {
+    hashtable_t *hashtable = create_hashtable();
+    put_to_hashtable(hashtable, "C", "Cupcake");
+    put_to_hashtable(hashtable, "D", "Donut");
+    put_to_hashtable(hashtable, "E", "Eclair");
+    put_to_hashtable(hashtable, "F", "Froyo");
+    put_to_hashtable(hashtable, "G", "Gingerbread");
+
+    char key[256];
+    while (fgets(key, 256, stdin)) {
+        chomp(key);
+        const char *value = get_from_hashtable(hashtable, key);
+        if (value) {
+            printf("%s => %s\n", key, value);
+        } else {
+            printf("The key `%s` is not found.\n", key);
+        }
     }
 
-    hashtable_t *hashtable = hashtable_create();
-    char buf[1024];
-    while (fgets(buf, 1024, fp)) {
-        chomp(buf);
-        hashtable_append(hashtable, buf);
-    }
-
-    fseek(fp, 0, SEEK_SET);
-    while (fgets(buf, 1024, fp)) {
-        chomp(buf);
-        printf("%s: %s\n", buf, hashtable_contain(hashtable, buf) ? "yes" : "no");
-    }
-    fclose(fp);
-
-    hashtable_destroy(hashtable);
+    destroy_hashtable(hashtable);
 }
