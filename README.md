@@ -12,3 +12,9 @@
 ```
 $ docker-compose build
 ```
+
+## Bash起動
+
+```
+$ docker-compose run --rm work bash
+```

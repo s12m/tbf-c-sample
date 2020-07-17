@@ -2,15 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 
-static char *chomp(char *buf)
-{
-    size_t length = strlen(buf);
-    if (buf[length - 1] == '\n') {
-        buf[length - 1] = '\0';
-    }
-    return buf;
-}
-
 int main() {
     hashtable_t *hashtable = create_hashtable();
     put_to_hashtable(hashtable, "C", "Cupcake");
@@ -20,8 +11,12 @@ int main() {
     put_to_hashtable(hashtable, "G", "Gingerbread");
 
     char key[256];
-    while (fgets(key, 256, stdin)) {
-        chomp(key);
+    while (1) {
+        printf("Search key (Ctrl+D to exit): ");
+        if (fgets(key, 256, stdin) == NULL) {
+            break;
+        }
+        key[strlen(key) - 1] = '\0'; // 改行コードを削除
         const char *value = get_from_hashtable(hashtable, key);
         if (value) {
             printf("%s => %s\n", key, value);
