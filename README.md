@@ -3,9 +3,9 @@
 ## 動作環境
 
 - Debian 10 (buster)
-- gcc 8.3.0
-- make 4.2.1
-- valgrind 3.14.0
+- gcc 8.x.x
+- make 4.x.x
+- valgrind 3.x.x
 
 ## 環境構築
 
