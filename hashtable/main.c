@@ -16,7 +16,7 @@ int main() {
 
     char key[256];
     while (1) {
-        printf("Search key (Ctrl+D to exit): ");
+        printf("Search key (Ctrl-d to exit): ");
         if (fgets(key, 256, stdin) == NULL) {
             break;
         }

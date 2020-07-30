@@ -28,7 +28,7 @@ struct hashtable {
 
 static size_t generate_hash_value(const char *key, const size_t capacity) {
     size_t val = 0;
-    for (char *p = key; *p != '\0'; p++) {
+    for (char *p = (char *)key; *p != '\0'; p++) {
         val += (unsigned char)(*p);
     }
     return val % capacity;
